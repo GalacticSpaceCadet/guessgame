@@ -1,0 +1,93 @@
+<DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>Random Letter Guess</title>
+	</head>
+	<body>
+	<h1>Do you have psychich abilities?</h1>
+	<h3>Guess the letter I am thinkg of...</h3>
+
+		
+
+		<p id="wins"></p>
+		<p id="loss"></p>
+		<p id="attemptsLeft"></p>
+		<p id="letterUsed"></p>
+		<p id="letter"></p>
+
+
+	
+		<script>
+		// alpha and random Letter are used to generate variable
+			var alpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+			var randomLetter = alpha[Math.floor(Math.random() * alpha.length)];
+			// variables inder this comment are user in gam
+			var scoreWins = 0;
+			var scoreLoss = 0;
+			var attemptsLeft = 9;
+			var allTheLettersUsed = [];
+
+	
+
+		/*function randomL(){
+			var alpha=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+			var  randomLetter=alpha[Math.floor(Math.random() * alpha.length)];
+			console.log(randomLetter);
+		}
+			randomL();*/
+
+		function updateAttemptsLeft(){
+			document.querySelector("#attemptsLeft").innerHTML = "Guesses Left: " + attemptsLeft;
+		}
+
+		function countWins(){
+			document.querySelector("#wins").innerHTML = "You have won " + scoreWins + " times.";
+		}
+
+		function countLoss(){
+			document.querySelector("#loss").innerHTML = "You have lost " + scoreLoss + " times";
+		}
+
+		function displayletter(showThatLetter){
+			document.querySelector('#letterUsed').innerHTML =" You have already used " + showThatLetter;
+		}
+		
+		updateAttemptsLeft();
+		countLoss();
+		countWins();
+
+		document.onkeyup =function(event) {
+			var keyNumber = event.keyCode;    
+  			var character = String.fromCharCode(keyNumber).toUpperCase(keyNumber);
+  			var letterused = character;
+  			allTheLettersUsed.push(letterused);
+  			displayletter(allTheLettersUsed);
+	  				if(character === randomLetter && attemptsLeft > 0){
+		  			 	alert("You Guessed the letter correctly");
+		  			 	scoreWins++;
+		  			 	alert("You Won!")
+		  			 	updateAttemptsLeft();
+		  			 	countWins();
+	  			 	}	
+		  		 	else if( character !== randomLetter && attemptsLeft > 0){
+		  		 		attemptsLeft--;
+
+		  		 		updateAttemptsLeft();
+		  		 	}
+		  		 	else if( character !== randomLetter && attemptsLeft == 0){
+		  		 		countLoss++;
+		  		 		countLoss();
+		  		 		alert("You Lose");
+		  		 	}
+
+	  			 	
+	  			 	updateAttemptsLeft();
+	  			 	}
+  		
+  		
+		</script>
+	
+
+	</body>
+</html>
